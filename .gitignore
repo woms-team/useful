@@ -18,3 +18,5 @@ __pycache__/
 *.py[cod]
 .pyc
 *.pyc
+
+src/db/migrations/versions/*
