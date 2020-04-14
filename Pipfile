@@ -11,6 +11,7 @@ pyjwt = "*"
 passlib = "*"
 sqlalchemy = "*"
 psycopg2-binary = "*"
+alembic = "*"
 
 [requires]
 python_version = "3.8"

@@ -7,7 +7,7 @@
 ### Инструменты разработки
 
 **Стек:**
-- Python >= 3.7
+- Python >= 3.8
 - FastAPI == 0.52.0
 - PostgreSQL
 
@@ -29,30 +29,15 @@
     
     pipenv install
 
-##### 5) В корне проекта создать файл .env
-    
-    SECRET_KEY=66a57bc62d00874ff566b46b4946b4ef4c6334a3a1d6d102c147ee83d538f23b
-    FIRST_SUPERUSER=Имя юзера
-    FIRST_SUPERUSER_PASSWORD=Пароль юзера
-    DB_NAME=Имя бд
-    DB_USER=Имя пользователя бд
-    DB_PASSWORD=Пароль бд
-    DB_HOST=localhost
-    USERS_OPEN_REGISTRATION=True
-    BACKEND_CORS_ORIGIN=http://localhost, http://localhost:4200, http://localhost:3000, http://localhost:8080
-    SMTP_PORT=587
-    SMTP_HOST=
-    SMTP_USER=
-    SMTP_PASSWORD=
-    SMTP_EMAILS_FROME_MAIL=
+##### 5) В папке `src.db` файл `local_config.py-example` переименовать в `local_config.py` и прописать конект к базе
 
 ##### 6) Создание миграций
 
-    скоро
+    alembic revision --autogenerate -m "Your comment"
 
 ##### 7) Выполнить команду для выполнения миграций
 
-    alembic upgrade head - не сейчас
+    alembic upgrade head
     
 ##### 8) Создать суперпользователя
 
