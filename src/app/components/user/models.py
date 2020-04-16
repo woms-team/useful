@@ -14,6 +14,7 @@ class User(Base):
     date_join = Column(DateTime)
     last_login = Column(DateTime)
     is_active = Column(Boolean, default=False)
-    is_admin = Column(Boolean, default=False)
+    is_staff = Column(Boolean, default=False)
+    is_superuser = Column(Boolean, default=False)
     avatar = Column(String)
 
