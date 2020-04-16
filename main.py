@@ -4,6 +4,7 @@ from fastapi import FastAPI, Response, Request
 from src.app import routers
 from src.db.session import SessionLocal
 
+
 app = FastAPI(
     title="Useful",
     description="Author - DJWOMS",
