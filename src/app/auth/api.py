@@ -5,11 +5,11 @@ from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
 from src.core import config
-from src.app.interface import service
 from src.app.base.utils.db import get_db
 
-from src.app.interface import models
-from src.app.interface import schemas
+from src.app.user import models
+from src.app.user import schemas
+from src.app.user import service
 
 from .schemas import Token, Msg
 from .logic import get_current_user

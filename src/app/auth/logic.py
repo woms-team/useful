@@ -11,8 +11,8 @@ from src.app.base.utils.db import get_db
 from .jwt import ALGORITHM
 from .schemas import TokenPayload
 
-from src.app.interface.models import User
-from src.app.interface import service
+from src.app.user.models import User
+from src.app.user import service
 
 
 reusable_oauth2 = OAuth2PasswordBearer(tokenUrl="/api/v1/login/access-token")
