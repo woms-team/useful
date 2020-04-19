@@ -31,11 +31,13 @@ def login_access_token(
     """
     OAuth2 compatible token login, get an access token for future requests
     """
+    data = form_data.parse()
+    print(data.username, data.password)
     user = service.user.authenticate(
-        db, email=form_data.username, password=form_data.password
+        db, username=form_data.username, password=form_data.password
     )
     if not user:
-        raise HTTPException(status_code=400, detail="Incorrect email or password")
+        raise HTTPException(status_code=400, detail="Incorrect username or password")
     elif not service.user.is_active(user):
         raise HTTPException(status_code=400, detail="Inactive user")
     access_token_expires = timedelta(minutes=config.ACCESS_TOKEN_EXPIRE_MINUTES)

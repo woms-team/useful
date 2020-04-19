@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 
 class UserBase(BaseModel):
+    username: Optional[str] = None
     email: Optional[str] = None
     is_active: Optional[bool] = True
     is_superuser: Optional[bool] = False
@@ -19,6 +20,7 @@ class UserBaseInDB(UserBase):
 class UserCreate(UserBaseInDB):
     """ Properties to receive via API on creation
     """
+    username: str
     email: str
     password: str
 
