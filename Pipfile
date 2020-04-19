@@ -4,23 +4,17 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-autoflake = "*"
-flake8 = "*"
-pytest = "*"
 
 [packages]
-fastapi = {extras = ["all"],version = "*"}
-pyjwt = "*"
-passlib = "*"
+fastapi = "*"
 sqlalchemy = "*"
-psycopg2-binary = "*"
 alembic = "*"
-starlette = "*"
-rx = "*"
-aniso8601 = "*"
+pydantic = "*"
+uvicorn = "*"
+psycopg2 = "*"
+passlib = "*"
+pyjwt = "*"
 emails = "*"
-graphql-core = "*"
-graphql-relay = "*"
 
 [requires]
 python_version = "3.8"
