@@ -1,6 +1,6 @@
 from typing import Optional
 from sqlalchemy.orm import Session
-from src.app.components.auth.security import verify_password, get_password_hash
+from src.app.auth.security import verify_password, get_password_hash
 from src.app.base.crud_base import CRUDBase
 
 from .models import User

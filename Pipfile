@@ -6,12 +6,15 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-fastapi = {extras = ["all"],version = "*"}
-pyjwt = "*"
-passlib = "*"
+fastapi = "*"
 sqlalchemy = "*"
-psycopg2-binary = "*"
 alembic = "*"
+pydantic = "*"
+uvicorn = "*"
+psycopg2 = "*"
+passlib = "*"
+pyjwt = "*"
+emails = "*"
 
 [requires]
 python_version = "3.8"
