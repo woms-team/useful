@@ -13,6 +13,7 @@ def main():
             email=config.SUPERUSER_EMAIL,
             password=config.SUPERUSER_PASSWORD,
             is_superuser=True,
+            is_active=True
         )
         user.create(db_session, obj_in=user_in)
 
