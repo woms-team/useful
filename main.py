@@ -1,6 +1,7 @@
 import uvicorn
 from fastapi import FastAPI, Response, Request
 
+from src.core import config
 from src.app import routers
 from src.db.session import SessionLocal
 
@@ -22,8 +23,8 @@ async def db_session_middleware(request: Request, call_next):
         request.state.db.close()
     return response
 
-app.include_router(routers.api_router)
+app.include_router(routers.api_router, prefix=config.API_V1_STR)
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8081, debug=True)
+    uvicorn.run(app, host="127.0.0.1", port=8080, debug=True)

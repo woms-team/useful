@@ -31,8 +31,6 @@ def login_access_token(
     """
     OAuth2 compatible token login, get an access token for future requests
     """
-    data = form_data.parse()
-    print(data.username, data.password)
     user = service.user.authenticate(
         db, username=form_data.username, password=form_data.password
     )

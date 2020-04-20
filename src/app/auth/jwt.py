@@ -1,6 +1,5 @@
-from datetime import datetime, timedelta
-
 import jwt
+from datetime import datetime, timedelta
 
 from src.core import config
 
@@ -9,6 +8,7 @@ access_token_jwt_subject = "access"
 
 
 def create_access_token(*, data: dict, expires_delta: timedelta = None):
+    """Создание токена"""
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.utcnow() + expires_delta

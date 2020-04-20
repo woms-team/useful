@@ -16,6 +16,8 @@ passlib = "*"
 pyjwt = "*"
 emails = "*"
 bcrypt = "*"
+python-multipart = "*"
+jinja2 = "*"
 
 [requires]
 python_version = "3.8"
