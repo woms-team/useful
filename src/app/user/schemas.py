@@ -18,11 +18,24 @@ class UserBaseInDB(UserBase):
 
 
 class UserCreate(UserBaseInDB):
-    """ Properties to receive via API on creation
+    """ Свойства для получения через API при создании из админки
     """
     username: str
     email: str
     password: str
+    first_name: str
+
+
+class UserCreateInRegistration(BaseModel):
+    """ Свойства для получения через API при регистрации
+    """
+    username: str
+    email: str
+    password: str
+    first_name: str
+
+    class Config:
+        orm_mode = True
 
 
 class UserUpdate(UserBaseInDB):

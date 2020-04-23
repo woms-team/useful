@@ -8,6 +8,7 @@ password_reset_jwt_subject = "preset"
 
 
 def send_email(email_to: str, subject_template="", html_template="", environment={}):
+    """Отправка email"""
     assert config.EMAILS_ENABLED, "no provided configuration for email variables"
     message = emails.Message(
         subject=JinjaTemplate(subject_template),
