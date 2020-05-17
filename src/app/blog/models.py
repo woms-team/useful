@@ -35,7 +35,7 @@ class Post(Base):
     """Класс модели новости"""
     __tablename__ = 'blog_posts'
     id = Column(Integer, primary_key=True)
-    author_id = Column(Integer, ForeignKey("user.id", ondelete="SET NULL"))
+    author_id = Column(Integer, ForeignKey("user.id"))
     category_id = Column(Integer, ForeignKey('blog_categories.id', ondelete="SET NULL"))
     title = Column(String(500))
     mini_text = Column(String(50000))
