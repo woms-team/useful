@@ -18,6 +18,7 @@ class Category(Base):
 tags = Table(
     'tags',
     Base.metadata,
+    Column('id', Integer, primary_key=True),
     Column('post_id', Integer, ForeignKey('blog_posts.id')),
     Column('tag_id', Integer, ForeignKey('blog_tags.id'))
 )
@@ -28,7 +29,7 @@ class Tag(Base):
     __tablename__ = 'blog_tags'
     id = Column(Integer, primary_key=True)
     name = Column(String(50), unique=True)
-    post = relationship("Post", secondary=tags, back_populates="posts")
+    post = relationship("Post", secondary=tags, back_populates="tag")
 
 
 class Post(Base):
@@ -47,9 +48,9 @@ class Post(Base):
     viewed = Column(Integer, default=0)
     description = Column(String(300))
 
-    author = relationship("User", back_populates="posts")
-    category = relationship("Category", back_populates="posts")
-    tag = relationship("Tag", secondary=tags, back_populates="tags")
+    author = relationship("User")
+    category = relationship("Category")
+    tag = relationship("Tag", secondary=tags, back_populates="post")
 
 
 class Comment(Base):
