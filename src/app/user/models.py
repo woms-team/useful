@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, DateTime, Boolean
+from sqlalchemy import Column, String, Integer, DateTime, Boolean, sql
 from src.db.session import Base
 
 
@@ -11,7 +11,7 @@ class User(Base):
     password = Column(String)
     first_name = Column(String(150))
     last_name = Column(String(150))
-    date_join = Column(DateTime)
+    date_join = Column(DateTime(timezone=True), server_default=sql.func.now())
     last_login = Column(DateTime)
     is_active = Column(Boolean, default=False)
     is_staff = Column(Boolean, default=False)
