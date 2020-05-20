@@ -14,9 +14,9 @@ class CRUDTag(CRUDBase[models.Tag, schemas.TagCreateUpdate, schemas.TagCreateUpd
     pass
 
 
-class CRUDPost(CRUDBase[models.Post, schemas.Post, schemas.PostCreateUpdate]):
+class CRUDPost(CRUDBase[models.Post, schemas.PostCreateUpdate, schemas.PostCreateUpdate]):
 
-    def create(self, db_session: Session, user, obj_in: schemas.PostCreateUpdate) -> models.Post:
+    def create(self, db_session: Session, *, obj_in: schemas.PostCreateUpdate, user: User) -> models.Post:
         db_obj = models.Post(**obj_in.dict(), author_id=user.id)
         db_session.add(db_obj)
         db_session.commit()
@@ -33,5 +33,5 @@ class CRUDPost(CRUDBase[models.Post, schemas.Post, schemas.PostCreateUpdate]):
 
 
 category = CRUDCategory(models.Category)
-tag = CRUDCategory(models.Tag)
-post = CRUDCategory(models.Post)
+tag = CRUDTag(models.Tag)
+post = CRUDPost(models.Post)

@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import List
 
 from pydantic import BaseModel
-from src.app.user.schemas import User
+from src.app.user.schemas import UserPublic, User
 
 
 class CategoryBase(BaseModel):
@@ -76,6 +76,8 @@ class PostCreateUpdate(PostBase):
     published_date: datetime
     image: bytes = None
     published: bool = True
+    # TODO: Доработай теги дебил
+    tags: List[int] = None
 
 
 class PostCreateUpdateInDB(PostCreateUpdate):
@@ -83,14 +85,18 @@ class PostCreateUpdateInDB(PostCreateUpdate):
     id: int
     author_id: int
 
+    class Config:
+        orm_mode = True
+
 
 class Post(PostBase):
     id: int
     created_date: datetime
     published_date: datetime
     viewed: int
-    author: User
+    author: UserPublic
     category: CategoryBaseInDB
+    # tag: List[Tag] = None
 
     class Config:
         orm_mode = True

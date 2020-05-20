@@ -71,7 +71,6 @@ def create_post(
         user: User = Depends(get_current_active_superuser)
     ):
     """Create post"""
-    print(service.post.create(db_session=db, obj_in=item, user=user))
     return service.post.create(db_session=db, obj_in=item, user=user)
 
 

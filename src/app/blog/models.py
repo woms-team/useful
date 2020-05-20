@@ -29,7 +29,7 @@ class Tag(Base):
     __tablename__ = 'blog_tags'
     id = Column(Integer, primary_key=True)
     name = Column(String(50), unique=True)
-    post = relationship("Post", secondary=tags, back_populates="tag")
+    # post = relationship("Post", secondary=tags, back_populates="tag")
 
 
 class Post(Base):
@@ -50,7 +50,8 @@ class Post(Base):
 
     author = relationship("User")
     category = relationship("Category")
-    tag = relationship("Tag", secondary=tags, back_populates="post")
+    # tag = relationship("Tag", secondary=tags, back_populates="post")
+    tags = relationship("Tag", secondary=tags, backref=backref('posts', lazy="dynamic"))
 
 
 class Comment(Base):

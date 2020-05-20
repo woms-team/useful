@@ -3,15 +3,15 @@ from pydantic import BaseModel
 
 
 class UserBase(BaseModel):
-    username: Optional[str] = None
-    email: Optional[str] = None
-    is_active: Optional[bool] = True
-    is_superuser: Optional[bool] = False
     first_name: Optional[str] = None
 
 
 class UserBaseInDB(UserBase):
     id: int = None
+    username: Optional[str] = None
+    email: Optional[str] = None
+    is_active: Optional[bool] = True
+    is_superuser: Optional[bool] = False
 
     class Config:
         orm_mode = True
@@ -54,3 +54,12 @@ class UserInDB(UserBaseInDB):
     """ Additional properties stored in DB
     """
     password: str
+
+
+class UserPublic(UserBase):
+    """ For public profile user
+    """
+    id: int
+
+    class Config:
+        orm_mode = True
