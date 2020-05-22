@@ -18,6 +18,7 @@ class CRUDPost(CRUDBase[models.Post, schemas.PostCreateUpdate, schemas.PostCreat
 
     def create(self, db_session: Session, *, obj_in: schemas.PostCreateUpdate, user: User) -> models.Post:
         db_obj = models.Post(**obj_in.dict(), author_id=user.id)
+        # tag  = models.Post.tags.append()
         db_session.add(db_obj)
         db_session.commit()
         db_session.refresh(db_obj)
