@@ -17,8 +17,19 @@ class CRUDTag(CRUDBase[models.Tag, schemas.TagCreateUpdate, schemas.TagCreateUpd
 class CRUDPost(CRUDBase[models.Post, schemas.PostCreateUpdate, schemas.PostCreateUpdate]):
 
     def create(self, db_session: Session, *, obj_in: schemas.PostCreateUpdate, user: User) -> models.Post:
-        db_obj = models.Post(**obj_in.dict(), author_id=user.id)
-        # tag  = models.Post.tags.append()
+        db_obj = models.Post(
+            title=obj_in.title,
+            mini_text=obj_in.mini_text,
+            text=obj_in.text,
+            description=obj_in.description,
+            category_id=obj_in.category_id,
+            published_date=obj_in.published_date,
+            #image=obj_in.image,
+            published=obj_in.published,
+            author_id=user.id
+        )
+        tags = db_session.query(models.Tag).filter(models.Tag.id.in_(obj_in.tags)).all()
+        db_obj.tags = [tag for tag in tags]
         db_session.add(db_obj)
         db_session.commit()
         db_session.refresh(db_obj)

@@ -84,6 +84,7 @@ class PostCreateUpdateInDB(PostCreateUpdate):
     """Post create and update"""
     id: int
     author_id: int
+    tags: List[Tag] = None
 
     class Config:
         orm_mode = True
