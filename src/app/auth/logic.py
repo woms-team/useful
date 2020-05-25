@@ -25,7 +25,6 @@ reusable_oauth2 = OAuth2PasswordBearer(tokenUrl="/api/v1/login/access-token")
 
 def get_current_user(db: Session = Depends(get_db), token: str = Security(reusable_oauth2)):
     """
-
     """
     try:
         payload = jwt.decode(token, config.SECRET_KEY, algorithms=[ALGORITHM])
