@@ -29,7 +29,7 @@
     
     pipenv install
 
-##### 5) В папке `src.db` файл `local_config.py-example` переименовать в `local_config.py` и прописать конект к базе
+##### 5) В папке `src.core` файл `local_config.py-example` переименовать в `local_config.py` и прописать конект к базе
 
 ##### 6) Создание миграций
 

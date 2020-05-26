@@ -76,7 +76,6 @@ class PostCreateUpdate(PostBase):
     published_date: datetime
     image: bytes = None
     published: bool = True
-    # TODO: Доработай теги дебил
     tags: List[int] = None
 
 
@@ -84,6 +83,7 @@ class PostCreateUpdateInDB(PostCreateUpdate):
     """Post create and update"""
     id: int
     author_id: int
+    tags: List[Tag] = None
 
     class Config:
         orm_mode = True
@@ -96,7 +96,7 @@ class Post(PostBase):
     viewed: int
     author: UserPublic
     category: CategoryBaseInDB
-    # tag: List[Tag] = None
+    tag: List[Tag] = None
 
     class Config:
         orm_mode = True
