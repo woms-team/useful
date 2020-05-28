@@ -3,7 +3,7 @@ from src.db.session import Base
 from sqlalchemy.orm import relationship, backref
 
 
-class Category(Base):
+class BoardCategory(Base):
     __tablename__ = 'board_categories'
 
     id = Column(Integer, primary_key=True, unique=True, index=True)
@@ -13,10 +13,10 @@ class Category(Base):
         ForeignKey('board_categories.id', ondelete="SET NULL"),
         nullable=True
     )
-    children = relationship("Category", backref=backref('parent', remote_side=[id]))
+    children = relationship("BoardCategory", backref=backref('parent', remote_side=[id]))
 
     def __repr__(self):
-        return f'<Category("{self.name}")'
+        return f'<BoardCategory("{self.name}")'
 
 
 class Toolkit(Base):
@@ -57,8 +57,8 @@ class Project(Base):
 
     user = relationship("User", backref="projects")
     language = relationship("Toolkit", backref="projects")
-    category = relationship("Category", backref="projects")
-    team = relationship("User", secondary=team, backref=backref('projects', lazy="dynamic"))
+    category = relationship("BoardCategory", backref="projects")
+    team = relationship("User", secondary=team, backref=backref('team_projects', lazy="dynamic"))
 
     def __repr__(self):
         return f'<Project("{self.name}")'
