@@ -91,7 +91,7 @@ class PostCreateUpdateInDB(PostCreateUpdate):
 
 class Post(PostBase):
     id: int
-    created_date: datetime.strftime()
+    created_date: datetime
     published_date: datetime
     viewed: int
     author: UserPublic
