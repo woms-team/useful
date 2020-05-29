@@ -3,7 +3,7 @@ from src.db.session import Base
 from sqlalchemy.orm import relationship, backref
 
 
-class Category(Base):
+class BoardCategory(Base):
     __tablename__ = 'board_categories'
 
     id = Column(Integer, primary_key=True, unique=True, index=True)
@@ -13,10 +13,10 @@ class Category(Base):
         ForeignKey('board_categories.id', ondelete="SET NULL"),
         nullable=True
     )
-    children = relationship("Category", backref=backref('parent', remote_side=[id]))
+    children = relationship("BoardCategory", backref=backref('parent', remote_side=[id]))
 
     def __repr__(self):
-        return f'<Category("{self.name}")'
+        return f'<BoardCategory("{self.name}")'
 
 
 class Toolkit(Base):
@@ -36,7 +36,11 @@ class Toolkit(Base):
 
 
 team = Table(
-
+    'teams',
+    Base.metadata,
+    Column('id', Integer, primary_key=True),
+    Column('project_id', Integer, ForeignKey('board_projects.id')),
+    Column('user_id', Integer, ForeignKey('user.id'))
 )
 
 
@@ -47,11 +51,14 @@ class Project(Base):
     name = Column(String(350))
     description = Column(String(50000))
     create_date = Column(DateTime(timezone=True), server_default=sql.func.now())
-    user = Column("User", ForeignKey("user.id"))
-    language = Column("Toolkit", ForeignKey("board_toolkit.id"))
-    category = Column("Category", ForeignKey("board_categories.id"))
+    user_id = Column(Integer, ForeignKey("user.id", ondelete="CASCADE"))
+    language_id = Column(Integer, ForeignKey("board_toolkit.id"))
+    category_id = Column(Integer, ForeignKey("board_categories.id"))
 
-    # team = M2M, User model
+    user = relationship("User", backref="projects")
+    language = relationship("Toolkit", backref="projects")
+    category = relationship("BoardCategory", backref="projects")
+    team = relationship("User", secondary=team, backref=backref('team_projects', lazy="dynamic"))
 
     def __repr__(self):
         return f'<Project("{self.name}")'
@@ -65,8 +72,14 @@ class Task(Base):
     create_date = Column(DateTime(timezone=True), server_default=sql.func.now())
     start_date = Column(DateTime)
     end_date = Column(DateTime)
-    worker = Column("User", ForeignKey('user.id'))
-    project = Column("Project", ForeignKey('board_projects.id'))
+    user_id = Column(Integer, ForeignKey('user.id', ondelete="CASCADE"))
+    user = relationship("User", backref="u_tasks", foreign_keys=[user_id])
+
+    worker_id = Column(Integer, ForeignKey('user.id', ondelete="SET NULL"), nullable=True)
+    worker = relationship("User", backref="w_tasks", foreign_keys=[worker_id])
+
+    project_id = Column(Integer, ForeignKey('board_projects.id', ondelete="CASCADE"))
+    project = relationship("Project", backref="tasks")
 
     def __repr__(self):
         return f'<Task("{self.id}")'
@@ -78,8 +91,11 @@ class CommentTask(Base):
     id = Column(Integer, primary_key=True, unique=True, index=True)
     message = Column(String(1000))
     create_date = Column(DateTime(timezone=True), server_default=sql.func.now())
-    task = Column("task", ForeignKey('board_tasks.id'))
-    user = Column("User", ForeignKey('user.id'))
+    task_id = Column(Integer, ForeignKey('board_tasks.id', ondelete="CASCADE"))
+    user_id = Column(Integer, ForeignKey('user.id', ondelete="CASCADE"))
+
+    task = relationship("Task", backref="comment_tasks")
+    user = relationship("User", backref="comment_tasks")
 
     def __repr__(self):
         return f'<CommentTask("{self.task} - {self.user}")'

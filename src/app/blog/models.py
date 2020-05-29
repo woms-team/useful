@@ -36,7 +36,7 @@ class Post(Base):
     """Класс модели новости"""
     __tablename__ = 'blog_posts'
     id = Column(Integer, primary_key=True)
-    author_id = Column(Integer, ForeignKey("user.id"))
+    author_id = Column(Integer, ForeignKey("user.id", ondelete="CASCADE"))
     category_id = Column(Integer, ForeignKey('blog_categories.id', ondelete="SET NULL"))
     title = Column(String(500))
     mini_text = Column(String(50000))
@@ -48,9 +48,8 @@ class Post(Base):
     viewed = Column(Integer, default=0)
     description = Column(String(300))
 
-    author = relationship("User")
-    category = relationship("Category")
-    # tag = relationship("Tag", secondary=tags, back_populates="post")
+    author = relationship("User", backref="posts")
+    category = relationship("Category", backref="posts")
     tags = relationship("Tag", secondary=tags, backref=backref('posts', lazy="dynamic"))
 
 
@@ -58,15 +57,18 @@ class Comment(Base):
     """Модель коментариев к новостям"""
     __tablename__ = 'blog_comments'
     id = Column(Integer, primary_key=True)
-    user = Column(Integer, ForeignKey("user.id", ondelete="CASCADE"))
-    post = Column(Integer, ForeignKey("blog_posts.id", ondelete="CASCADE"))
+    user_id = Column(Integer, ForeignKey("user.id", ondelete="CASCADE"))
+    post_id = Column(Integer, ForeignKey("blog_posts.id", ondelete="CASCADE"))
     parent_id = Column(Integer, ForeignKey('blog_comments.id'), nullable=True)
-    children = relationship('Comment', backref=backref('parent', remote_side=[id]), lazy='dynamic')
     message = Column(String(2000))
     created_date = Column(DateTime(timezone=True), server_default=sql.func.now())
     update_date = Column(DateTime(timezone=True), server_default=sql.func.now())
     published = Column(Boolean, default=True)
     deleted = Column(Boolean, default=False)
+
+    children = relationship('Comment', backref=backref('parent', remote_side=[id]), lazy='dynamic')
+    user = relationship('User', backref='comments')
+    post = relationship('Post', backref='comments')
 
 
 class SpySearch(Base):

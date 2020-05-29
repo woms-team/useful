@@ -12,6 +12,7 @@ def main():
             username=config.SUPERUSER_NAME,
             email=config.SUPERUSER_EMAIL,
             password=config.SUPERUSER_PASSWORD,
+            first_name=config.SUPERUSER_FIRST_NAME,
             is_superuser=True,
             is_active=True
         )
