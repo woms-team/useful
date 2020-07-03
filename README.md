@@ -21,33 +21,45 @@
 
     git clone ссылка_сгенерированная_в_вашем_репозитории
 
-##### 3) Установить pipenv
+##### 3) Установить pyenv
 
-    pip install pipenv
+[pyenv installer](https://github.com/pyenv/pyenv-installer)
     
-##### 4) Устанавливить зависимости
+[help docs](https://github.com/pyenv/pyenv)
     
-    pipenv install
+##### 4) Установить poetry
 
-##### 5) В папке `src.core` файл `local_config.py-example` переименовать в `local_config.py` и прописать конект к базе
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+    
+[help docs](https://python-poetry.org/docs/)
+    
+##### 5) Устанавливить зависимости
+    
+    poetry install
 
-##### 6) Создание миграций
+##### 6) В папке `src.core` файл `local_config.py-example` переименовать в `local_config.py` и прописать конект к базе
+
+##### 7) Активировать виртуальное окружение
+
+    poetry shell
+       
+##### 8) Создание миграций
 
     alembic revision --autogenerate -m "Your comment"
 
-##### 7) Выполнить команду для выполнения миграций
+##### 9) Выполнить команду для выполнения миграций
 
     alembic upgrade head
     
-##### 8) Создать суперпользователя
+##### 10) Создать суперпользователя
 
     в разработке
     
-##### 9) Запустить сервер
+##### 11) Запустить сервер
 
     python main.py
     
-##### 10) Перейти по адресу
+##### 12) Перейти по адресу
 
     http://127.0.0.1:8000/docs
     
