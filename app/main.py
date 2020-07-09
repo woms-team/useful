@@ -35,6 +35,6 @@ async def db_session_middleware(request: Request, call_next):
 
 app.include_router(routers.api_router, prefix=config.API_V1_STR)
 
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8080, debug=True)
+#
+# if __name__ == "__main__":
+#     uvicorn.run(app, host="127.0.0.1", port=80, debug=True)
