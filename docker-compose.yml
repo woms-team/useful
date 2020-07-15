@@ -10,11 +10,11 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: db_name
     ports:
-      - 5432:5432
+      - 5433:5432
   fastapi:
     build: ./
     volumes:
-    - ./app:/app
+    - .:/app
     ports:
-      - 8080:80
+      - 8000:80
     restart: always
