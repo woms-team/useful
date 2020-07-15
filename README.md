@@ -62,7 +62,7 @@
 ##### 12) Перейти по адресу
 
     http://127.0.0.1:8000/docs
-    
+ 
 ## License
 
 [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause)
