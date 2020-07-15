@@ -75,7 +75,7 @@ def create_post(
 
 
 @blog_router.get("/post", response_model=List[schemas.Post])
-def get_list_post(db: Session = Depends(get_db)):
+def get_list_post(db: Session = Depends(get_db), current: User = Depends(get_current_user)):
     """Get list post"""
     return service.post.get_multi(db_session=db)
 
